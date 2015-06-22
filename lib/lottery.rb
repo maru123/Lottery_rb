@@ -13,10 +13,7 @@ class Lottery
     if name.empty? then return false end
     if @members.include?(name) then return false end
     if weight < 1 then return false end
-
-    for i in 1..weight do
-        @members << name
-    end
+    weight.times { @members << name }
 
   end
 
@@ -30,10 +27,10 @@ class Lottery
 
     last_members = Marshal.load(Marshal.dump(@members))
 
-    for i in 1..@prize_count do
-        winner_index = rand(last_members.length-1)
-        results << last_members[winner_index]
-        last_members.delete(last_members[winner_index])
+    @prize_count.times do
+      winner_index = rand(last_members.length-1)
+      results << last_members[winner_index]
+      last_members.delete(last_members[winner_index])
     end
     results
   end
