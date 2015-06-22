@@ -1,11 +1,10 @@
 class Lottery
 
-  attr_reader :members, :winners, :prize_count
+  attr_reader :members, :prize_count
 
   def initialize (prize_count)
     @prize_count = prize_count
     @members = []
-    @winners = []
     @lastMembers = []
   end
 
@@ -21,22 +20,22 @@ class Lottery
 
   end
 
-  def selectWinners
+  def winners
 
-    @winners = []
+    results = []
 
     if @prize_count >= @members.uniq.length then
-        return @winners = Marshal.load(Marshal.dump(@members.uniq))
+        return results = Marshal.load(Marshal.dump(@members.uniq))
     end
 
     last_members = Marshal.load(Marshal.dump(@members))
 
     for i in 1..@prize_count do
         winner_index = rand(last_members.length-1)
-        @winners << last_members[winner_index]
+        results << last_members[winner_index]
         last_members.delete(last_members[winner_index])
     end
-
+    results
   end
 
 end

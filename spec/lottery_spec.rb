@@ -55,7 +55,6 @@ describe Lottery do
       let(:prize_count) { 3 }
       it '登録した3人の名前が返される' do
         add_member
-        lottery.selectWinners
         expect(lottery.winners).to eq members
       end
     end
@@ -64,7 +63,6 @@ describe Lottery do
       let(:prize_count) { 2 }
       it '懸賞分の名前が返される' do
         add_member
-        lottery.selectWinners
         expect(lottery.winners.length).to eq prize_count
       end
     end
@@ -78,7 +76,6 @@ describe Lottery do
         lottery.add("A5",5)
         lottery.add("A10",10)
         100.times do
-          lottery.selectWinners
           counts[lottery.winners.first.intern] += 1
         end
         expect(counts[:A1] < counts[:A3] && counts[:A3] < counts[:A5] && counts[:A5] < counts[:A10]).to eq true
