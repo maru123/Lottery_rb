@@ -31,7 +31,7 @@ describe Lottery do
       expect(lottery.members).to eq members
     end
   end
-  describe '#selectWinners' do
+  describe '#winners' do
   #   # shared_examples '該当者なし' do
   #   #   it '空の配列が返される' do
   #   #     expect(lottery.winners).to eq []
@@ -75,9 +75,12 @@ describe Lottery do
         lottery.add("A3",3)
         lottery.add("A5",5)
         lottery.add("A10",10)
-        100.times do
+        1000.times do
           counts[lottery.winners.first.intern] += 1
         end
+        puts "-------------------------------------"
+        p counts
+        puts "-------------------------------------"
         expect(counts[:A1] < counts[:A3] && counts[:A3] < counts[:A5] && counts[:A5] < counts[:A10]).to eq true
       end
     end
