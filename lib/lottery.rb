@@ -9,11 +9,12 @@ class Lottery
   end
 
   def add(name,weight)
-
-    if name.empty? then return false end
-    if @members.include?(name) then return false end
-    if weight < 1 then return false end
+    name.empty? || @members.include?(name) || weight < 1 ||
     weight.times { @members << name }
+    # if name.empty? then return false end
+    # if @members.include?(name) then return false end
+    # if weight < 1 then return false end
+    # weight.times { @members << name }
 
   end
 
