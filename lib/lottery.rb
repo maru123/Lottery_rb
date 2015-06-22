@@ -5,7 +5,6 @@ class Lottery
   def initialize (prize_count)
     @prize_count = prize_count
     @members = []
-    @lastMembers = []
   end
 
   def add(name,weight)
@@ -14,21 +13,15 @@ class Lottery
   end
 
   def winners
-
-    results = []
-
     if @prize_count >= @members.uniq.length
         return @members.uniq
     end
 
-    last_members = Marshal.load(Marshal.dump(@members))
-
-    @prize_count.times do
+    last_members = @members.dup
+    @prize_count.times.each_with_object([]) do |i, results|
       member = last_members.sample
       results << member
       last_members.delete(member)
     end
-    results
   end
-
 end

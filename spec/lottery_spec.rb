@@ -78,9 +78,7 @@ describe Lottery do
         1000.times do
           counts[lottery.winners.first.intern] += 1
         end
-        puts "-------------------------------------"
-        p counts
-        puts "-------------------------------------"
+        
         expect(counts[:A1] < counts[:A3] && counts[:A3] < counts[:A5] && counts[:A5] < counts[:A10]).to eq true
       end
     end
